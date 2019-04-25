@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>Successfully registered</title>
+      <style>
+        span {color: blue;}
+      </style>
+   </head>
+    
+   <body>
+	<a th:href="@{/}">Home</a>
+	 
+	     | &nbsp;
+	 
+	   <a th:href="@{/usersList}">Members</a>
+	 
+	     | &nbsp;
+	 
+	   <a href="/register">Register one more user</a>
+	
+      <h2>You have successfully registered!</h2>
+      <div th:if="${user != null}">
+         <ul>
+            <li>User Name: <span th:utext="${user.userName}">..</span></li>
+            <li>Email: <span th:utext="${user.email}">..</span></li>
+         </ul>
+      </div>
+   </body>
+</html>
