@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Buy product</title>
+<style>
+table {
+	border-collapse: collapse;
+	width: 70%;
+	background-color: #f1f1c1;
+}
+
+th, td {
+	text-align: left;
+	padding: 4px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+</style>
+</head>
+<body>
+	<a th:href="@{/}">Home</a>
+
+	<h1>Products</h1>
+	<!-- <table border="2">
+		<tr>
+		<th>Id</th>
+		<th>Product name</th>
+		<th>Company name</th>
+		<th>Price</th>
+		<th>Discount in %</th>
+		<th>Price after discount</th>
+		<th>Material</th>
+		<th>Category</th>
+		<th>For</th>
+		<th>Availability</th>
+		
+	</tr>
+	<tr th:each="product : ${products}">
+		<td th:text="${product.id}">Dummy</td>
+		<td th:text="${product.name}">Dummy</td>
+		<td th:text="${product.company}">Dummy</td>
+		<td th:text="${product.price}">Dummy>
+		<td th:text="${product.discountInPrecentage}">Dummy</td>
+		<td th:text="${product.actualPrice}">Dummy</td>
+		<td th:text="${product.materialType}">Dummy</td>
+		<td th:text="${product.category}">Dummy</td>
+		<td th:text="${product.itemFor}">Dummy</td>
+		<td th:text="${product.availability}">Dummy</td>
+	</tr>
+</table> -->
+	<form action="#" th:action="@{/buy}" th:object="${product}"
+		method="post">
+		<fieldset>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Product name</th>
+						<th>Company name</th>
+						<th>Price</th>
+						<th>Discount in %</th>
+						<th>Price after discount</th>
+						<th>Material</th>
+						<th>Category</th>
+						<th>For</th>
+						<th>Availability</th>
+						<th>Buy</th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="prod, itemStat : ${product}">
+						<tr>
+							<td><input th:value="${prod.id}" /></td>
+							<input type="hidden" id="id" name="id" th:value="${prod.id}" />
+							
+							<td><input th:value="${prod.name}" /></td>
+							<input type="hidden" id="name" name="name" th:value="${prod.name}" />
+							
+							<td><input th:value="${prod.company}" /></td>
+							<!-- <input type="hidden" id="company" name="company" th:value="${prod.company}" /> -->
+							
+							<td><input th:value="${prod.price}" /></td>
+							<input type="hidden" id="price" name="price" th:value="${prod.price}" />
+							
+							<td><input th:value="${prod.discountInPrecentage}" /></td>
+							<input type="hidden" id="discountInPrecentage" name="discountInPrecentage" th:value="${prod.discountInPrecentage}" />
+							
+							<td><input th:value="${prod.actualPrice}" /></td>
+							<input type="hidden" id="actualPrice" name="actualPrice" th:value="${prod.actualPrice}" />
+							
+							<td><input th:value="${prod.materialType}" /></td>
+							<input type="hidden" id="materialType" name="materialType" th:value="${prod.materialType}" />
+							
+							<td><input th:value="${prod.category}" /></td>
+							<input type="hidden" id="category" name="category" th:value="${prod.category}" />
+							
+							<td><input th:value="${prod.itemFor}" /></td>
+							<input type="hidden" id="itemFor" name="itemFor" th:value="${prod.itemFor}" />
+							
+							<td><input th:value="${prod.availability}" /></td>
+							<input type="hidden" id="availability" name="availability" th:value="${prod.availability}" />
+							
+							<td> <input type="submit" value="Buy" /></td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+		</fieldset>
+	</form>
+</body>
+</html>
