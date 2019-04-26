@@ -48,7 +48,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		// To store users and their data
 		Address address = new Address("Mid Town", "Road Number 1, Banjara Hills", "Hyderabad", "Telangana", "India", 500031);
 		addressRepository.save(address);
-		Users users = new Users("Sudhir", "Kumar", new BigInteger("7993610710"), "Male", "123456", "sudhir@gmail.com", "sudhir");
+		Users users = new Users("Sudhir", "Kumar", new BigInteger("7993610710"), "Male", "123456", "sudhir@gmail.com", "sudhir","admin");
 		users.getAddress().add(address);
 		userRepository.save(users);
 		
@@ -56,7 +56,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		
 		Address address2 = new Address("Raheja Mindspace", "Titus building, Hitech City", "Hyderabad", "Telangana", "India", 500081);
 		addressRepository.save(address2);
-		Users users2 = new Users("Gautham", "Jain", new BigInteger("1234567890"), "Male", "123456", "gautham@gmail.com", "gautham");
+		Users users2 = new Users("Gautham", "Jain", new BigInteger("1234567890"), "Male", "123456", "gautham@gmail.com", "gautham","user");
 		users2.getAddress().add(address2);
 		userRepository.save(users2);
 		

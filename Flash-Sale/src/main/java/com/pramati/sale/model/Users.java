@@ -35,13 +35,15 @@ public class Users implements Serializable {
 	private String password;
 	private String email;
 	
+	private String role;
+	
 	@OneToMany
 	private Set<Address> address = new HashSet<>();
 
 	
 	public Users() {}
 	
-	public Users(String firstName, String lastName, BigInteger phone, String gender, String password, String email,String userName) {
+	public Users(String firstName, String lastName, BigInteger phone, String gender, String password, String email,String userName,String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
@@ -49,10 +51,11 @@ public class Users implements Serializable {
 		this.password = password;
 		this.email = email;
 		this.userName = userName;
+		this.role = role;
 	}
 
 	public Users(String firstName, String lastName, BigInteger phone, String gender, String password, String email,
-			Set<Address> address, String userName) {
+			Set<Address> address, String userName, String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
@@ -61,6 +64,7 @@ public class Users implements Serializable {
 		this.email = email;
 		this.address = address;
 		this.userName = userName;
+		this.role = role;
 	}
 	
 	
@@ -154,6 +158,14 @@ public class Users implements Serializable {
 		this.email = email;
 	}
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
