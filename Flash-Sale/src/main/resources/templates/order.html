@@ -1,38 +1,50 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <title>Successfully registered</title>
-      <style>
-        span {color: blue;}
-      </style>
-   </head>
-    
-   <body>
-	<a th:href="@{/}">Home</a>
-	 
-	     | &nbsp;
-	 
-	   <a th:href="@{/usersList}">Members</a>
-	 
-	     | &nbsp;
-	 
-	   <a href="/register">Register one more user</a>
-	
-		| &nbsp;
-	 
-	   <a href="/products">Buy one more product</a>
-		| &nbsp;
- 
-   	   <a th:href="@{/myOrderedProducts}">My Ordered products</a>
-	
-      <h2>Order placed successfully!</h2>
-      <div th:if="${order != null}">
-         <ul>
+   
+<head>
+      
+<title>Successfully registered</title>       
+<style>
+        span {
+	color: blue;
+}
+      
+</style>
+   
+</head>
+        
+<body>
+	<a th:href="@{/}">Home</a>        | &nbsp;      
+	<a th:href="@{/usersList}">Members</a>        | &nbsp;      
+	<a href="/register">Register one more user</a> | &nbsp;      
+	<a href="/products">Buy one more product</a> | &nbsp;      
+	<a th:href="@{/myOrderedProducts}">My Ordered products</a>       
+	<h2>Order placed successfully!</h2>
+	      
+	<div th:if="${order != null}">
+		         
+		<ul>
 			<li>Order id: <span th:utext="${order.id}">..</span></li>
 			<li>Order date: <span th:utext="${order.dop}">..</span></li>
-            <li>Order placed by : <span th:utext="${order.user.userName}">..</span></li>
-            <li>User Email: <span th:utext="${order.user.email}">..</span></li>
-         </ul>
-      </div>
-   </body>
+			            
+			<li>Order placed by : <span th:utext="${order.user.userName}">..</span></li>
+			            
+			<li>User Email: <span th:utext="${order.user.email}">..</span></li>
+			         
+		</ul>
+		      
+	</div>
+	<p>
+		User: <span th:text="${user}" />
+	</p>
+	<p>
+		Roles: <span th:text="${roles}" />
+	</p>
+	<form action="/logout" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}"
+			th:value="${_csrf.token}" /> <input type="submit" value="Logout"
+			style="float: right;">
+	</form>
+	   
+</body>
 </html>

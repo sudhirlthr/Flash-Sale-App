@@ -1,29 +1,45 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <title>Successfully registered</title>
-      <style>
-        span {color: blue;}
-      </style>
-   </head>
-    
-   <body>
-	<a th:href="@{/}">Home</a>
-	 
-	     | &nbsp;
-	 
-	   <a th:href="@{/usersList}">Members</a>
-	 
-	     | &nbsp;
-	 
-	   <a href="/register">Register one more user</a>
-	
-      <h2>You have successfully registered!</h2>
-      <div th:if="${user != null}">
-         <ul>
-            <li>User Name: <span th:utext="${user.userName}">..</span></li>
-            <li>Email: <span th:utext="${user.email}">..</span></li>
-         </ul>
-      </div>
-   </body>
+   
+<head>
+      
+<title>Successfully registered</title>       
+<style>
+        span {
+	color: blue;
+}
+      
+</style>
+   
+</head>
+        
+<body>
+	<a th:href="@{/}">Home</a>        | &nbsp;      
+	<a th:href="@{/usersList}">Members</a>        | &nbsp;      
+	<a href="/register">Register one more user</a>       
+	<h2>You have successfully registered!</h2>
+	      
+	<div th:if="${user != null}">
+		         
+		<ul>
+			            
+			<li>User Name: <span th:utext="${user.userName}">..</span></li>
+			            
+			<li>Email: <span th:utext="${user.email}">..</span></li>          
+		</ul>
+		      
+	</div>
+	<p>
+		User: <span th:text="${user}" />
+	</p>
+	<p>
+		Roles: <span th:text="${roles}" />
+	</p>
+	<form action="/logout" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}"
+			th:value="${_csrf.token}" /> <input type="submit" value="Logout"
+			style="float: right;">
+	</form>
+	   
+</body>
 </html>

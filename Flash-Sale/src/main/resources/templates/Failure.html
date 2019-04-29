@@ -1,19 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <title>Successfully registered</title>
-      <style>
-        span {color: blue;}
-      </style>
-   </head>
-    
-   <body>
-	<a th:href="@{/}">Home</a>
-	 
-	     | &nbsp;
-	 
-	   <a href="/register">Register one more user</a>
-	
-      <h2>You are not authorized to buy the products, since you are not registered or loggedIn!</h2>
-   </body>
+   
+<head>
+      
+<title>Successfully registered</title>       
+<style>
+        span {
+	color: blue;
+}
+      
+</style>
+   
+</head>
+        
+<body>
+	<a th:href="@{/}">Home</a>        | &nbsp;      
+	<a href="/register">Register one more user</a>       
+	<h2>You are not authorized to buy the products, since you are not
+		registered or loggedIn!</h2>
+	   
+</body>
 </html>

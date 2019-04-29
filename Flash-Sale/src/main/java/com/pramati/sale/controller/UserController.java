@@ -5,7 +5,11 @@ package com.pramati.sale.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pramati.sale.model.Address;
+import com.pramati.sale.model.Authority;
 import com.pramati.sale.model.Users;
+import com.pramati.sale.repository.AuthorityRepositories;
 import com.pramati.sale.repository.UserRepository;
 import com.pramati.sale.util.UserValidator;
 
@@ -33,6 +39,10 @@ public class UserController {
 	private UserRepository userRepository;
 	
 	@Autowired
+	private AuthorityRepositories authorityRepository;
+	
+	
+	@Autowired
 	UserValidator userValidator;
 	
 	@RequestMapping(path = "/")
@@ -41,7 +51,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.GET)
-	public String forwardRegisterPage(Model model) {
+	public String forwardRegisterPage(Model model, HttpServletRequest request) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("user", auth.getName());
+		model.addAttribute("roles", auth.getAuthorities());
+		
 		Users users = new Users();
 		Address address = new Address();
 		model.addAttribute("users",users);
@@ -51,7 +66,14 @@ public class UserController {
 	
 	@RequestMapping(path = "/registerUser", method = RequestMethod.POST)
 	public String registerUser(Model model, @ModelAttribute("Users") @Validated Users users,
-	         BindingResult result, final RedirectAttributes redirectAttributes) {
+	         BindingResult result, final RedirectAttributes redirectAttributes, HttpServletRequest request) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("user", auth.getName());
+		model.addAttribute("roles", auth.getAuthorities());
+		
+		
 		if(result.hasErrors()) {
 			return "redirect:/register";
 		}
@@ -61,6 +83,12 @@ public class UserController {
 		
 		//enable user
 		users.setEnabled(true);
+		
+		
+		//Since username is also registered with Authority, so add it in Authority also
+		Authority userAuthority = new Authority(users.getUserName(), "ROLE_USER");
+		//save it to database
+		authorityRepository.save(userAuthority);
 		
 		userRepository.save(users);
 		redirectAttributes.addFlashAttribute("user", users);
@@ -79,13 +107,25 @@ public class UserController {
 	
 	
 	@RequestMapping(path = "/usersList", method = RequestMethod.GET)
-	public String getUsers(Model model) {
+	public String getUsers(Model model, HttpServletRequest request) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("user", auth.getName());
+		model.addAttribute("roles", auth.getAuthorities());
+		
 		model.addAttribute("users", userRepository.findAll());
 		return "users";
 	}
 	
 	@RequestMapping(path="/success")
-	public String successMessage(Model model) {
+	public String successMessage(Model model, HttpServletRequest request) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("user", auth.getName());
+		model.addAttribute("roles", auth.getAuthorities());
+		
 		return "success";
 	}
 		

@@ -7,7 +7,11 @@ import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,7 +43,12 @@ public class OrderController {
 	ProductRepository productRepository;
 	
 	@RequestMapping(path = "/buy", method = RequestMethod.POST)
-	public String buyProduct(Model model, @ModelAttribute("product") Product product, Principal principal) {
+	public String buyProduct(Model model, @ModelAttribute("product") Product product, Principal principal, HttpServletRequest request) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("user", auth.getName());
+		model.addAttribute("roles", auth.getAuthorities());		
 		
 		product = productRepository.findById(product.getId()).get();
 		product.setAvailability(Availability.sold); // this product has been sold
@@ -66,12 +75,21 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path = "/order")
-	public String orderRedirect(Model model) {
+	public String orderRedirect(Model model, HttpServletRequest request) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("user", auth.getName());
+		model.addAttribute("roles", auth.getAuthorities());
 		//model.addAttribute("order", orderRepository.findAll());
 		return "order";
 	}
 	@RequestMapping(path = "/failure")
-	public String failureRedirect(Model model) {
+	public String failureRedirect(Model model, HttpServletRequest request) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("user", auth.getName());
+		model.addAttribute("roles", auth.getAuthorities());
+		
 		return "Failure";
 	}
 }

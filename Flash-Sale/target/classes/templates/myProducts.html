@@ -24,52 +24,62 @@ tr:nth-child(even) {
 	<a th:href="@{/}">Home</a>
 
 	<h1>Ordered Products</h1>
-<table border="1">
-		<span>
-			<!-- <td>
+	<table border="1">
+		<span> <!-- <td>
 				<tr>
 					<th>Order Id</th>
 				</tr>
 			</td> -->
 			<td>
-				<tr>
-					<th>Order Id</th>
-					<th>Product Id</th>
-					<th>Product name</th>
-					<th>Company name</th>
-					<th>Price</th>
-					<th>Discount in %</th>
-					<th>Price after discount</th>
-					<th>Material</th>
-					<th>Category</th>
-					<th>For</th>
-					<th>Availability</th>
-					<th>Username</th>
-					<th>Email</th>
-					<th>Phone</th>
-				</tr>
+		<tr>
+				<th>Order Id</th>
+				<th>Product Id</th>
+				<th>Product name</th>
+				<th>Company name</th>
+				<th>Price</th>
+				<th>Discount in %</th>
+				<th>Price after discount</th>
+				<th>Material</th>
+				<th>Category</th>
+				<th>For</th>
+				<th>Availability</th>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Phone</th>
+			</tr>
 			</td>
 		</span>
 		<span th:each="orders : ${myProducts}" th:remove="tag">
 			<td>
-				<tr th:each="product : ${orders.productSet}">
-					<td th:text="${orders.id}">Dummy</td>
-					<td th:text="${product.id}">Dummy</td>
-					<td th:text="${product.name}">Dummy</td>
-					<td th:text="${product.company.name}">Dummy</td>
-					<td th:text="${product.price}">Dummy>
-					<td th:text="${product.discountInPrecentage}">Dummy</td>
-					<td th:text="${product.actualPrice}">Dummy</td>
-					<td th:text="${product.materialType}">Dummy</td>
-					<td th:text="${product.category}">Dummy</td>
-					<td th:text="${product.itemFor}">Dummy</td>
-					<td th:text="${product.availability}">Dummy</td>
-					<td th:text="${orders.users.userName}">Dummy</td>
-					<td th:text="${orders.users.email}">Dummy</td>
-					<td th:text="${orders.users.phone}">Dummy</td>
-				</tr>
+		<tr th:each="product : ${orders.productSet}">
+				<td th:text="${orders.id}">Dummy</td>
+				<td th:text="${product.id}">Dummy</td>
+				<td th:text="${product.name}">Dummy</td>
+				<td th:text="${product.company.name}">Dummy</td>
+				<td th:text="${product.price}">Dummy>
+				<td th:text="${product.discountInPrecentage}">Dummy</td>
+				<td th:text="${product.actualPrice}">Dummy</td>
+				<td th:text="${product.materialType}">Dummy</td>
+				<td th:text="${product.category}">Dummy</td>
+				<td th:text="${product.itemFor}">Dummy</td>
+				<td th:text="${product.availability}">Dummy</td>
+				<td th:text="${orders.users.userName}">Dummy</td>
+				<td th:text="${orders.users.email}">Dummy</td>
+				<td th:text="${orders.users.phone}">Dummy</td>
+			</tr>
 			</td>
 		</span>
-</table>
+	</table>
+	<p>
+		User: <span th:text="${user}" />
+	</p>
+	<p>
+		Roles: <span th:text="${roles}" />
+	</p>
+	<form action="/logout" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}"
+			th:value="${_csrf.token}" /> <input type="submit" value="Logout"
+			style="float: right;">
+	</form>
 </body>
 </html>
