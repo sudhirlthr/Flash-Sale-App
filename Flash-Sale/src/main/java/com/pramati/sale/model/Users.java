@@ -5,12 +5,17 @@ import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -20,174 +25,182 @@ import javax.persistence.OneToOne;
 
 
 @Entity
+@Table(name = "users")
 public class Users implements Serializable {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "userid")
 	private Long id;
 	
-	private String userName;
+	@Column(name="username", unique = true)
+	private String username;
+	
+	@Column(name="firstName")
 	private String firstName;
+	
+	@Column(name="lastName")
 	private String lastName;
+	
+	@Column(name="phone")
 	private BigInteger phone;
+	
+	@Column(name="gender")
 	private String gender;
 	
+	@Column(name="password")
 	private String password;
+	
+	@Column(name="email")
 	private String email;
 	
-	private String role;
+	@Column(name = "enabled")
+	private Boolean enabled;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "userrole", joinColumns = @JoinColumn(referencedColumnName = "userid"), inverseJoinColumns = @JoinColumn(name = "roleid"))
+	private Set<Authority> authority = new HashSet<>();
 	
 	@OneToMany
 	private Set<Address> address = new HashSet<>();
 
 	
 	public Users() {}
-	
-	public Users(String firstName, String lastName, BigInteger phone, String gender, String password, String email,String userName,String role) {
+
+
+	public Users(String userName, String firstName, String lastName, BigInteger phone, String gender, String password,
+			String email, Boolean enabled) {
+		this.username = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.gender = gender;
 		this.password = password;
 		this.email = email;
-		this.userName = userName;
-		this.role = role;
+		this.enabled = enabled;
 	}
 
-	public Users(String firstName, String lastName, BigInteger phone, String gender, String password, String email,
-			Set<Address> address, String userName, String role) {
+
+	public Users(String userName, String firstName, String lastName, BigInteger phone, String gender, String password,
+			String email, Boolean enabled, Set<Authority> authority, Set<Address> address) {
+		this.username = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.gender = gender;
 		this.password = password;
 		this.email = email;
+		this.enabled = enabled;
+		this.authority = authority;
 		this.address = address;
-		this.userName = userName;
-		this.role = role;
 	}
-	
-	
-	/*
-	 * public Users(String userName, String firstName, String lastName, BigInteger
-	 * phone, String gender, String password, String email, Set<Order> orders) {
-	 * this.userName = userName; this.firstName = firstName; this.lastName =
-	 * lastName; this.phone = phone; this.gender = gender; this.password = password;
-	 * this.email = email; this.orders = orders; }
-	 */
 
-	/*
-	 * public Users(String userName, String firstName, String lastName, BigInteger
-	 * phone, String gender, String password, String email, Set<Address> address,
-	 * Set<Order> orders) { this.userName = userName; this.firstName = firstName;
-	 * this.lastName = lastName; this.phone = phone; this.gender = gender;
-	 * this.password = password; this.email = email; this.address = address;
-	 * this.orders = orders; }
-	 */
-
-	
 	public Long getId() {
 		return id;
 	}
+
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+
+	public String getUserName() {
+		return username;
+	}
+
+
+	public void setUserName(String userName) {
+		this.username = userName;
+	}
+
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+
 	public String getLastName() {
 		return lastName;
 	}
+
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+
 	public BigInteger getPhone() {
 		return phone;
 	}
+
 
 	public void setPhone(BigInteger phone) {
 		this.phone = phone;
 	}
 
-	public Set<Address> getAddress() {
-		return address;
-	}
-
-	public void setAddress(Set<Address> address) {
-		this.address = address;
-	}
 
 	public String getGender() {
 		return gender;
 	}
 
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public String getPassword() {
 		return password;
 	}
 
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public String getRole() {
-		return role;
+
+
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+
+	public Set<Authority> getAuthority() {
+		return authority;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Users other = (Users) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+
+	public void setAuthority(Set<Authority> authority) {
+		this.authority = authority;
+	}
+
+
+	public Set<Address> getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Set<Address> address) {
+		this.address = address;
 	}
 }

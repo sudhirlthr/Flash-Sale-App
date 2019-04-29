@@ -8,7 +8,6 @@
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/FlashSaleApplication.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/model/Company.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/model/Orders.java
-/home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/model/Items.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/repository/ProductRepository.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/bootstrap/Bootstrap.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/model/Address.java
@@ -17,7 +16,5 @@
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/repository/CompanyRepository.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/repository/UserRepository.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/util/UserValidator.java
-/home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/model/ProductWrapperDTO.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/repository/OrderRepository.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/util/SecurityConfig.java
-/home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/util/WebConfiguration.java

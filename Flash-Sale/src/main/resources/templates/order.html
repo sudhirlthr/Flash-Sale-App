@@ -21,6 +21,9 @@
 		| &nbsp;
 	 
 	   <a href="/products">Buy one more product</a>
+		| &nbsp;
+ 
+   	   <a th:href="@{/myOrderedProducts}">My Ordered products</a>
 	
       <h2>Order placed successfully!</h2>
       <div th:if="${order != null}">

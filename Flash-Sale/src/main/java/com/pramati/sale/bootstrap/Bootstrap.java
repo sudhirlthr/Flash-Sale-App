@@ -2,12 +2,14 @@ package com.pramati.sale.bootstrap;
 
 import java.math.BigInteger;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.pramati.sale.model.Address;
+import com.pramati.sale.model.Authority;
 import com.pramati.sale.model.Availability;
 import com.pramati.sale.model.Company;
 import com.pramati.sale.model.Gender;
@@ -15,6 +17,7 @@ import com.pramati.sale.model.Orders;
 import com.pramati.sale.model.Product;
 import com.pramati.sale.model.Users;
 import com.pramati.sale.repository.AddressRepository;
+import com.pramati.sale.repository.AuthorityRepositories;
 import com.pramati.sale.repository.CompanyRepository;
 import com.pramati.sale.repository.OrderRepository;
 import com.pramati.sale.repository.ProductRepository;
@@ -28,14 +31,16 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	private CompanyRepository companyRepository;
 	private ProductRepository productRepository;
 	private OrderRepository orderRepository;
+	private AuthorityRepositories authorityRepositories;
 		
 	public Bootstrap(UserRepository userRepository, AddressRepository addressRepository,
-			CompanyRepository companyRepository, ProductRepository productRepository, OrderRepository orderRepository) {
+			CompanyRepository companyRepository, ProductRepository productRepository, OrderRepository orderRepository, AuthorityRepositories authorityRepositories) {
 		this.userRepository = userRepository;
 		this.addressRepository = addressRepository;
 		this.companyRepository = companyRepository;
 		this.productRepository = productRepository;
 		this.orderRepository = orderRepository;
+		this.authorityRepositories = authorityRepositories;
 	}
 
 	@Override
@@ -48,7 +53,17 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		// To store users and their data
 		Address address = new Address("Mid Town", "Road Number 1, Banjara Hills", "Hyderabad", "Telangana", "India", 500031);
 		addressRepository.save(address);
-		Users users = new Users("Sudhir", "Kumar", new BigInteger("7993610710"), "Male", "123456", "sudhir@gmail.com", "sudhir","admin");
+		
+		
+		Authority roles = new Authority("sudhir", "ROLE_USER");
+		Authority roles2 = new Authority("gautham", "ROLE_ADMIN");
+		Set<Authority> rolesSet = new HashSet<>();
+		rolesSet.add(roles);
+		rolesSet.add(roles2);
+		authorityRepositories.save(roles);
+		authorityRepositories.save(roles2);
+		
+		Users users = new Users("sudhir","sudhir","kumar",new BigInteger("7993610710"),"Male","{noop}123","sudhir@gmail.com",true);
 		users.getAddress().add(address);
 		userRepository.save(users);
 		
@@ -56,7 +71,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		
 		Address address2 = new Address("Raheja Mindspace", "Titus building, Hitech City", "Hyderabad", "Telangana", "India", 500081);
 		addressRepository.save(address2);
-		Users users2 = new Users("Gautham", "Jain", new BigInteger("1234567890"), "Male", "123456", "gautham@gmail.com", "gautham","user");
+		Users users2 = new Users("gautham","Gautham","Jain",new BigInteger("1234567890"),"Male","{noop}1234","gautham@gmail.com",true);
 		users2.getAddress().add(address2);
 		userRepository.save(users2);
 		

@@ -3,6 +3,7 @@
  */
 package com.pramati.sale.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,19 @@ public class ProductController {
 	}
 	
 	@RequestMapping(path = "/myOrderedProducts/user/{user}",method = RequestMethod.GET)
-	public String getMyOrdredProducts(@PathVariable("user") String user, Model model) {
-		Users users = userRepository.findByUserName(user);
+	public String getMyOrdredProductsByPathVariable(@PathVariable("user") String user, Model model) {
+		Users users = userRepository.findByUsername(user);
+		model.addAttribute("myProducts", orderRepository.findByUsers(users));
+		return "myProducts";
+	}
+	
+	@RequestMapping(path = "/myOrderedProducts",method = RequestMethod.GET)
+	public String getMyOrdredProducts(Model model, Principal principal) {
+		String username = "";
+		if(null != principal && null != principal.getName())
+			username = principal.getName();
+		System.out.println("Order for user = "+username);
+		Users users = userRepository.findByUsername(username);
 		model.addAttribute("myProducts", orderRepository.findByUsers(users));
 		return "myProducts";
 	}

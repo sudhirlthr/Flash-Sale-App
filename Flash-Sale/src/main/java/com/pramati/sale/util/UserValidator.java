@@ -50,7 +50,7 @@ public class UserValidator implements Validator{
 		else if(dbUser != null)
 			 errors.rejectValue("email", "Duplicate.users.email");
 		
-		dbUser = userRepository.findByUserName(users.getUserName());
+		dbUser = userRepository.findByUsername(users.getUserName());
 		if(dbUser != null) {
 			errors.rejectValue("userName", "Duplicate.users.userName");
 		}

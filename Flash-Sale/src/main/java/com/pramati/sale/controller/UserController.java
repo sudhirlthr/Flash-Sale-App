@@ -55,6 +55,13 @@ public class UserController {
 		if(result.hasErrors()) {
 			return "redirect:/register";
 		}
+		System.out.println("\n\nPassword = "+users.getPassword());
+		String springSecuritySupportedPassword = "{noop}".concat(users.getPassword().trim());
+		users.setPassword(springSecuritySupportedPassword);
+		
+		//enable user
+		users.setEnabled(true);
+		
 		userRepository.save(users);
 		redirectAttributes.addFlashAttribute("user", users);
 		return "redirect:/success";

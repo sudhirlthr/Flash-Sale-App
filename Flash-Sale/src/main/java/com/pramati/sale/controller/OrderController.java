@@ -3,6 +3,7 @@
  */
 package com.pramati.sale.controller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,14 +39,20 @@ public class OrderController {
 	ProductRepository productRepository;
 	
 	@RequestMapping(path = "/buy", method = RequestMethod.POST)
-	public String buyProduct(Model model, @ModelAttribute("product") Product product) {
+	public String buyProduct(Model model, @ModelAttribute("product") Product product, Principal principal) {
 		
 		product = productRepository.findById(product.getId()).get();
 		product.setAvailability(Availability.sold); // this product has been sold
 		productRepository.save(product);
 		
+		String loggedInUser = principal.getName();
+		
+		if(loggedInUser == null || loggedInUser.equals("")) {
+			return "redirect:/failure";
+		}
+		
 		// get the user details
-		Users users = userRepository.findByUserName("sudhir");
+		Users users = userRepository.findByUsername(loggedInUser);
 		
 		// update Order table
 		Set<Product> productSet = new HashSet<>();
@@ -62,5 +69,9 @@ public class OrderController {
 	public String orderRedirect(Model model) {
 		//model.addAttribute("order", orderRepository.findAll());
 		return "order";
+	}
+	@RequestMapping(path = "/failure")
+	public String failureRedirect(Model model) {
+		return "Failure";
 	}
 }
