@@ -91,7 +91,7 @@ public class UserController {
 		authorityRepository.save(userAuthority);
 		
 		userRepository.save(users);
-		redirectAttributes.addFlashAttribute("user", users);
+		redirectAttributes.addFlashAttribute("users", users);
 		return "redirect:/success";
 	}
 	
