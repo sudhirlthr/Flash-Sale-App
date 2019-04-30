@@ -16,5 +16,6 @@
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/repository/CompanyRepository.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/repository/UserRepository.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/util/UserValidator.java
+/home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/repository/AuthorityRepositories.java
+/home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/model/Authority.java
 /home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/repository/OrderRepository.java
-/home/sudhirk/Desktop/SpringPoc/Flash-Sale/src/main/java/com/pramati/sale/util/SecurityConfig.java

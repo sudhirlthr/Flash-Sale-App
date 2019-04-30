@@ -15,6 +15,5 @@ com/pramati/sale/model/Company.class
 com/pramati/sale/repository/ItemsRepository.class
 com/pramati/sale/repository/UserRepository.class
 com/pramati/sale/FlashSaleApplication.class
-com/pramati/sale/util/SecurityConfig.class
 com/pramati/sale/model/Users.class
 com/pramati/sale/repository/ProductRepository.class
