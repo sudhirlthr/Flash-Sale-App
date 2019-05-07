@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.pramati.sale.entity.Orders;
-import com.pramati.sale.repository.UserRepository;
 import com.pramati.sale.service.OrderService;
 
 /**
@@ -29,9 +28,6 @@ import com.pramati.sale.service.OrderService;
  */
 @RestController
 public class OrderController {
-
-	@Autowired
-	UserRepository userRepository;
 
 	@Autowired
 	OrderService orderService;

@@ -17,7 +17,6 @@ public class AddressService {
 	AddressRepository addressRepository;
 	
 	public boolean processUserAddress(Set<Address> userAddresses) {
-		userAddresses.forEach(add -> System.out.println(add.getAddressLine1()));
 		List<Address> userAddressList = new ArrayList<>(userAddresses);		
 		if(addressRepository.saveAll(userAddressList) != null)
 			return true;

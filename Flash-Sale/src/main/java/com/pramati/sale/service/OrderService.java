@@ -3,29 +3,18 @@
  */
 package com.pramati.sale.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonObjectDeserializer;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pramati.sale.entity.Availability;
 import com.pramati.sale.entity.Orders;
 import com.pramati.sale.entity.Products;
@@ -50,44 +39,6 @@ public class OrderService {
 
 	@Autowired
 	UserRepository userRepository;
-
-	/*
-	 * @Transactional public String buyProduct(Model model, Long productId, Integer
-	 * numberOfItem, String username, HttpServletRequest request) {
-	 * 
-	 * model.addAttribute("uri", request.getRequestURI());
-	 * model.addAttribute("user", username); //model.addAttribute("roles",
-	 * auth.getAuthorities());
-	 * 
-	 * 
-	 * if (username == null || username.equals("")) { return "failure"; }
-	 * 
-	 * Products product = productRepository.findById(productId).get();
-	 * 
-	 * if(product != null && product.getNumberOfItemAvailable() >= numberOfItem) {
-	 * 
-	 * if(product.getNumberOfItemAvailable() == numberOfItem )// if number of item
-	 * is same as number of stock for a product
-	 * product.setAvailability(Availability.out_of_stock); // Number of item for a
-	 * product is sold in in stock else
-	 * product.setAvailability(Availability.available); // Number of available
-	 * product is more than ordered quantity
-	 * 
-	 * // update number of item available for same product after purchase
-	 * product.setNumberOfItemAvailable(product.getNumberOfItemAvailable()-
-	 * numberOfItem); productRepository.save(product);
-	 * 
-	 * // get the user details to create a map between order and user Users users =
-	 * userRepository.findByUsername(username);
-	 * 
-	 * // update Order table Set<Products> productSet = new HashSet<>();
-	 * productSet.add(product); Orders orders = new Orders(users, productSet);
-	 * orderRepository.save(orders);
-	 * 
-	 * model.addAttribute("order", orders); //
-	 * redirectAttributes.addFlashAttribute("order", order); return "Success"; }else
-	 * { return "Number of item requested is not available"; } }
-	 */
 	
 	@Transactional
 	public String userBoughtProducts(String data){
