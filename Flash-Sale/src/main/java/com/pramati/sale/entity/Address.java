@@ -1,4 +1,4 @@
-package com.pramati.sale.model;
+package com.pramati.sale.entity;
 
 import java.io.Serializable;
 

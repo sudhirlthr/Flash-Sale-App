@@ -28,14 +28,30 @@ public class FlashSaleApplication {
 	      return new WebSecurityConfigurerAdapter() {
 	          @Override
 	          protected void configure(HttpSecurity http) throws Exception {
-	              http.authorizeRequests()
-	                  .antMatchers("/h2-console/**").hasRole("ADMIN")//allow h2 console access to admins only
-	                  .antMatchers("/buy/**").authenticated()
-	                  .antMatchers("/**").permitAll()
-	                  .anyRequest().authenticated()//all other urls can be access by any authenticated role
-	                  .and().formLogin()//enable form login instead of basic login
-	                  .and().csrf().ignoringAntMatchers("/h2-console/**")//don't apply CSRF protection to /h2-console
-	                  .and().headers().frameOptions().sameOrigin();//allow use of frame to same origin urls
+				
+				/*
+				 * http.authorizeRequests()
+				 * .antMatchers("/h2-console/**").hasRole("ADMIN")//allow h2 console access to
+				 * admins only .antMatchers("/flash-sale/buy/**").authenticated()
+				 * .antMatchers("/flash-sale/**").permitAll() .anyRequest().authenticated()//all
+				 * other urls can be access by any authenticated role .and().formLogin()//enable
+				 * form login instead of basic login
+				 * .and().csrf().ignoringAntMatchers("/h2-console/**")//don't apply CSRF
+				 * protection to /h2-console
+				 * .and().headers().frameOptions().sameOrigin();//allow use of frame to same
+				 * origin urls
+				 */				 	      
+	        	  
+	          
+	          
+	        	  http
+	        	  .csrf().disable()
+	        	  .authorizeRequests()
+	        	  .antMatchers("/h2-console/**").hasRole("ADMIN")
+	        	  .antMatchers("/flash-sale/buy/**").authenticated()
+                  .antMatchers("/**").permitAll();
+	        	  
+	        	  
 	          }
 
 	          @Override

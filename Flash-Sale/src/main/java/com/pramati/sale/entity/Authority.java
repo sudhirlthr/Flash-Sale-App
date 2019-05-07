@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pramati.sale.model;
+package com.pramati.sale.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

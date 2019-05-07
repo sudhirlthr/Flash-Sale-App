@@ -7,13 +7,14 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pramati.sale.model.Availability;
-import com.pramati.sale.model.Product;
+import com.pramati.sale.entity.Availability;
+import com.pramati.sale.entity.Products;
 
 /**
  * @author sudhirk
  * 25-Apr-2019
  */
-public interface ProductRepository extends JpaRepository<Product, Long> {
-	public List<Product> findByAvailability(Availability availability);
+public interface ProductRepository extends JpaRepository<Products, Long> {
+	public List<Products> findByAvailability(Availability availability);
+	public Products findByNumberOfItemAvailableAndId(Integer numberOfItemAvailable, Long productId);
 }

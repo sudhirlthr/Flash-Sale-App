@@ -5,7 +5,7 @@ package com.pramati.sale.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pramati.sale.model.Company;
+import com.pramati.sale.entity.Company;
 
 /**
  * @author sudhirk

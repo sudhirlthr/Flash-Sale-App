@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pramati.sale.model;
+package com.pramati.sale.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ import javax.persistence.Id;
  * 25-Apr-2019
  */
 @Entity
-public enum Gender {
+public enum Category {
 	Male, Female;
 	
 	@Id

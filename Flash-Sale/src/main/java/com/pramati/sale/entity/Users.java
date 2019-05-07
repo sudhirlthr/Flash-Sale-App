@@ -1,4 +1,4 @@
-package com.pramati.sale.model;
+package com.pramati.sale.entity;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -33,8 +34,8 @@ public class Users implements Serializable {
 	@Column(name = "userid")
 	private Long id;
 	
-	@Column(name="username", unique = true)
-	private String username;
+	@Column(name="userName", unique = true)
+	private String userName;
 	
 	@Column(name="firstName")
 	private String firstName;
@@ -46,7 +47,7 @@ public class Users implements Serializable {
 	private BigInteger phone;
 	
 	@Column(name="gender")
-	private String gender;
+	private Category gender;
 	
 	@Column(name="password")
 	private String password;
@@ -68,9 +69,9 @@ public class Users implements Serializable {
 	public Users() {}
 
 
-	public Users(String userName, String firstName, String lastName, BigInteger phone, String gender, String password,
+	public Users(String userName, String firstName, String lastName, BigInteger phone, Category gender, String password,
 			String email, Boolean enabled) {
-		this.username = userName;
+		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
@@ -81,9 +82,9 @@ public class Users implements Serializable {
 	}
 
 
-	public Users(String userName, String firstName, String lastName, BigInteger phone, String gender, String password,
+	public Users(String userName, String firstName, String lastName, BigInteger phone, Category gender, String password,
 			String email, Boolean enabled, Set<Authority> authority, Set<Address> address) {
-		this.username = userName;
+		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
@@ -106,12 +107,12 @@ public class Users implements Serializable {
 
 
 	public String getUserName() {
-		return username;
+		return userName;
 	}
 
 
 	public void setUserName(String userName) {
-		this.username = userName;
+		this.userName = userName;
 	}
 
 
@@ -145,12 +146,12 @@ public class Users implements Serializable {
 	}
 
 
-	public String getGender() {
+	public Category getGender() {
 		return gender;
 	}
 
 
-	public void setGender(String gender) {
+	public void setGender(Category gender) {
 		this.gender = gender;
 	}
 

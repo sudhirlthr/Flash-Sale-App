@@ -64,7 +64,6 @@ tr:nth-child(even) {
 						<th>Discount in %</th>
 						<th>Price after discount</th>
 						<th>Material</th>
-						<th>Category</th>
 						<th>For</th>
 						<th>Availability</th>
 						<th>Buy</th>
@@ -80,7 +79,7 @@ tr:nth-child(even) {
 							<input type="hidden" id="name" name="name"
 								th:value="${prod.name}" />
 
-							<td><input th:value="${prod.company}" /></td>
+							<td><input th:value="${prod.company.name}" /></td>
 							<!-- <input type="hidden" id="company" name="company" th:value="${prod.company}" /> -->
 
 							<td><input th:value="${prod.price}" /></td>
@@ -104,9 +103,9 @@ tr:nth-child(even) {
 							<input type="hidden" id="category" name="category"
 								th:value="${prod.category}" />
 
-							<td><input th:value="${prod.itemFor}" /></td>
+							<!-- <td><input th:value="${prod.itemFor}" /></td>
 							<input type="hidden" id="itemFor" name="itemFor"
-								th:value="${prod.itemFor}" />
+								th:value="${prod.itemFor}" /> -->
 
 							<td><input th:value="${prod.availability}" /></td>
 							<input type="hidden" id="availability" name="availability"

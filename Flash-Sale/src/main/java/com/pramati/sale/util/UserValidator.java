@@ -11,7 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.pramati.sale.model.Users;
+import com.pramati.sale.entity.Users;
 import com.pramati.sale.repository.UserRepository;
 
 /**
@@ -50,7 +50,7 @@ public class UserValidator implements Validator{
 		else if(dbUser != null)
 			 errors.rejectValue("email", "Duplicate.users.email");
 		
-		dbUser = userRepository.findByUsername(users.getUserName());
+		dbUser = userRepository.findByUserName(users.getUserName());
 		if(dbUser != null) {
 			errors.rejectValue("userName", "Duplicate.users.userName");
 		}

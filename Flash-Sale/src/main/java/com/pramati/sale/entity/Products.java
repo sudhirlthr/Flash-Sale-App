@@ -1,4 +1,4 @@
-package com.pramati.sale.model;
+package com.pramati.sale.entity;
 
 import java.io.Serializable;
 
@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -15,7 +17,8 @@ import javax.persistence.Id;
 
 
 @Entity
-public class Items implements Serializable {
+@Table(name = "products")
+public class Products implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,22 +28,33 @@ public class Items implements Serializable {
 	private Double price;
 	private Double discountInPrecentage;
 	private Double actualPrice;
-	private String company;
 	private String model;
 	private String materialType;
+	private Category category;
+	private Availability availability;
+	private Integer numberOfItemAvailable;
 	
-	public Items() {}
+	@ManyToOne
+	private Company company;
+	
+	public Products() {}
+	
 
-	public Items(String name, Double price, Double discountInPrecentage, Double actualPrice, String company,
-			String model, String materialType) {
+	public Products(String name, Double price, Double discountInPrecentage, Double actualPrice, String model,
+			String materialType, Category category, Availability availability, Company company, Integer numberOfItemAvailable) {
 		this.name = name;
 		this.price = price;
 		this.discountInPrecentage = discountInPrecentage;
 		this.actualPrice = actualPrice;
-		this.company = company;
 		this.model = model;
 		this.materialType = materialType;
+		this.category = category;
+		this.availability = availability;
+		this.company = company;
+		this.numberOfItemAvailable = numberOfItemAvailable;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -82,11 +96,11 @@ public class Items implements Serializable {
 		this.actualPrice = actualPrice;
 	}
 
-	public String getCompany() {
+	public Company getCompany() {
 		return company;
 	}
 
-	public void setCompany(String company) {
+	public void setCompany(Company company) {
 		this.company = company;
 	}
 
@@ -105,6 +119,38 @@ public class Items implements Serializable {
 	public void setMaterialType(String materialType) {
 		this.materialType = materialType;
 	}
+	
+
+	public Category getCategory() {
+		return category;
+	}
+
+
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+
+
+	public Availability getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(Availability availability) {
+		this.availability = availability;
+	}
+
+	public Integer getNumberOfItemAvailable() {
+		return numberOfItemAvailable;
+	}
+
+
+	public void setNumberOfItemAvailable(Integer numberOfItemAvailable) {
+		this.numberOfItemAvailable = numberOfItemAvailable;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -121,7 +167,7 @@ public class Items implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Items other = (Items) obj;
+		Products other = (Products) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

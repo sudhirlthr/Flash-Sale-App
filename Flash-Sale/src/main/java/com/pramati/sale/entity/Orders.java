@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pramati.sale.model;
+package com.pramati.sale.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -29,7 +29,8 @@ public class Orders implements Serializable {
 	private Users users;
 	
 	@OneToMany
-	private Set<Product> productSet = new HashSet<>();
+	private Set<Products> productSet = new HashSet<>();
+	
 
 	public Orders() {
 	}
@@ -37,8 +38,8 @@ public class Orders implements Serializable {
 	public Orders(Users users) {
 		this.users = users;
 	}
-	
-	public Orders(Users users, Set<Product> productSet) {
+
+	public Orders(Users users, Set<Products> productSet) {
 		this.users = users;
 		this.productSet = productSet;
 	}
@@ -59,11 +60,11 @@ public class Orders implements Serializable {
 		this.users = users;
 	}
 
-	public Set<Product> getProductSet() {
+	public Set<Products> getProductSet() {
 		return productSet;
 	}
 
-	public void setProductSet(Set<Product> productSet) {
+	public void setProductSet(Set<Products> productSet) {
 		this.productSet = productSet;
 	}
 
