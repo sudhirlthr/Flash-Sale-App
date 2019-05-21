@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package com.pramati.sale.util;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+/**
+ * @author sudhirk
+ *
+ */
+@ResponseStatus(code = HttpStatus.NOT_FOUND)
+public class UserNotFoundException extends RuntimeException {
+	
+	public UserNotFoundException(String message) {
+		super(message);
+	}
+}

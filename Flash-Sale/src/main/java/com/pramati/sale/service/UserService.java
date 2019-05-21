@@ -46,6 +46,10 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
+	
+	public Users getUserById(Long id) {
+		return userRepository.findById(id).orElse(null);
+	}
 
 	public String registerNewUser(Users users) {
 		
